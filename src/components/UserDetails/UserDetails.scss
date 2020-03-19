@@ -1,0 +1,37 @@
+.user-details {
+  margin: 0 40px;
+  overflow: auto;
+
+  .user-info {
+    display: flex;
+    align-items: center;
+
+    &-avatar {
+      align-self: flex-start;
+    }
+
+    img {
+      display: block;
+      border-radius: 50%;
+      width: 80px;
+      border: 1px solid cadetblue;
+    }
+
+    .user-data {
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      p {
+        margin: 5px;
+      }
+    }
+  }
+
+  &__posts-block {
+    border: 1px solid lightslategray;
+    padding: 20px;
+  }
+}

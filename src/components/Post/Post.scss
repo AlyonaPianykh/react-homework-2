@@ -1,0 +1,36 @@
+.post {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid darkgrey;
+  width: 500px;
+  margin: 20px;
+
+  h1 {
+    font-size: 20px;
+    color: rgba(64, 30, 255, 0.205);
+  }
+
+  .block {
+    display: flex;
+    text-align: right;
+    justify-content: space-between;
+    padding: 10px;
+  }
+
+  .text {
+    font-size: 16px;
+    color: black;
+  }
+
+  .block1 {
+    margin-top: 10px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &.styled {
+    background-color: #61dafb !important;
+  }
+}

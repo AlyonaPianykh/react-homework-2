@@ -1,0 +1,27 @@
+.my-btn {
+  height: 38px;
+
+  &.btn {
+    box-shadow: unset;
+
+    &:focus {
+      box-shadow: unset;
+    }
+  }
+
+  &.disabled {
+    // todo добавить курсор not-allowed
+    cursor: not-allowed;
+  }
+
+  &.btn-primary {
+    &.focus,
+    &:focus {
+      box-shadow: unset;
+    }
+  }
+
+  &.btn-styled {
+    background: lightpink !important;
+  }
+}
