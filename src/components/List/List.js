@@ -23,7 +23,7 @@ export class List extends Component {
 
     return (
       <div className={`${CN} ${className}`}>
-        { !!title && <h4>{title}</h4> }
+        { !!title && <p>{title}</p> }
         <ul className="change-menu list-group">
           {!!options.length && options.map(item => {
             return (
