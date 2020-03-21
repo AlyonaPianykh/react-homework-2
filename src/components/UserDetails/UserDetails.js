@@ -50,7 +50,7 @@ export class UserDetails extends Component {
       isPostsLoading: true
     });
 
-    fetch(`https://gorest.co.in/public-api/posts?access-token=Y-yix-b1YsL9UH_BoBcBHJOTogG6G63LzCyP&user_id=${id}`, )
+    fetch(`https://gorest.co.in/public-api/posts?access-token=lnTvnz19Npxz_A2q6zrT6_KJPtGLUVfzktNO&user_id=${id}`, )
       .then(res => {
         if (!res.ok) throw Error(res.statusText);
         return res.json();

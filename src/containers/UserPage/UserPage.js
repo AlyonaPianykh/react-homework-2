@@ -33,7 +33,7 @@ export class UserPage extends Component {
       isLoading: true
     });
 
-    fetch('https://gorest.co.in/public-api/users?access-token=Y-yix-b1YsL9UH_BoBcBHJOTogG6G63LzCyP')
+    fetch('https://gorest.co.in/public-api/users?access-token=lnTvnz19Npxz_A2q6zrT6_KJPtGLUVfzktNO')
       .then(res => {
         if (!res.ok) throw Error(res.statusText);
         return res.json();
