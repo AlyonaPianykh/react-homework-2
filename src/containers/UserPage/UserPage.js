@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { List } from '../../components/List/List';
 import { UserDetails } from '../../components/UserDetails/UserDetails';
 import { UserListOption } from '../../components/UserListOption/UserListOption';
+import { accessToken } from '../../constants';
 import './UserPage.scss';
 
 const CN = 'user-page';
@@ -33,7 +34,7 @@ export class UserPage extends Component {
       isLoading: true
     });
 
-    fetch('https://gorest.co.in/public-api/users?access-token=lnTvnz19Npxz_A2q6zrT6_KJPtGLUVfzktNO')
+    fetch(`https://gorest.co.in/public-api/users?access-token=${accessToken}`)
       .then(res => {
         if (!res.ok) throw Error(res.statusText);
         return res.json();
@@ -60,7 +61,6 @@ export class UserPage extends Component {
 
     return (
       <div className={CN}>
-        <div>selected user: {selectedUserId}</div>
         {
           error && <div>{error}</div>
         }

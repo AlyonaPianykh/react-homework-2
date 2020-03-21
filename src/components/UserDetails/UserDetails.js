@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import './UserDetails.scss';
+
 import { Post } from '../Post/Post';
 import { List } from '../List/List';
+import { accessToken } from '../../constants';
+import './UserDetails.scss';
 
 const CN = 'user-details';
 
@@ -50,7 +52,7 @@ export class UserDetails extends Component {
       isPostsLoading: true
     });
 
-    fetch(`https://gorest.co.in/public-api/posts?access-token=lnTvnz19Npxz_A2q6zrT6_KJPtGLUVfzktNO&user_id=${id}`, )
+    fetch(`https://gorest.co.in/public-api/posts?access-token=${accessToken}&user_id=${id}`, )
       .then(res => {
         if (!res.ok) throw Error(res.statusText);
         return res.json();
@@ -82,11 +84,12 @@ export class UserDetails extends Component {
       );
     }
 
-    const { _links, first_name, last_name, dob, email, gender, address } = user;
+    const { _links, first_name, last_name, dob, email, gender, address, id } = user;
     const { avatar } = _links;
 
     return (
       <div className={CN}>
+        <div className={`${CN}__id`}>id:{id}</div>
         <div className="user-info ">
           <div className="user-info-avatar">
             <img src={avatar.href} alt="photo"/>
@@ -110,8 +113,8 @@ export class UserDetails extends Component {
           {
             !isPostsLoading && !!userPosts.length && (
               <>
-                <h4>All Posts:</h4>
-              <List options={userPosts} itemRenderer={Post}/>
+
+              <List title="All posts:" options={userPosts} itemRenderer={Post} className={`${CN}__posts-list`}/>
               </>
             )
           }

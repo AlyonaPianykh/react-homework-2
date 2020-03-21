@@ -1,10 +1,17 @@
 .user-details {
-  margin: 0 40px;
+  margin: 0 20px;
   overflow: auto;
+
+  &__id {
+    text-align: right;
+    font-size: 12px;
+    color: gray;
+  }
 
   .user-info {
     display: flex;
-    align-items: center;
+    align-items: start;
+    text-align: left;
 
     &-avatar {
       align-self: flex-start;
@@ -21,8 +28,7 @@
       padding: 10px;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      font-size: 12px;
 
       p {
         margin: 5px;
@@ -33,5 +39,16 @@
   &__posts-block {
     border: 1px solid lightslategray;
     padding: 20px;
+  }
+
+  &__posts-list {
+    padding: 0;
+    margin: 0;
+
+    .list-group-item {
+      border: none;
+      margin: 0;
+      padding: 0;
+    }
   }
 }
