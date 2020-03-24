@@ -4,6 +4,7 @@ import { Post } from '../Post/Post';
 import { List } from '../List/List';
 import { accessToken } from '../../constants';
 import './UserDetails.scss';
+import LoadingIndicator from "../LoadingIndicator/LoadingIndicator";
 
 const CN = 'user-details';
 
@@ -125,7 +126,7 @@ export class UserDetails extends Component {
           }
           {
             isPostsLoading && (
-              <div>Posts are in loading state ...</div>
+              <LoadingIndicator/>
             )
           }
         </div>
