@@ -79,7 +79,9 @@ export class UserPage extends Component {
                   className={`${CN}__user-list`}
                   title="All Users:"
                 />
+
               <UserDetails user={selectedUser}/>
+
             </div>
           )
         }

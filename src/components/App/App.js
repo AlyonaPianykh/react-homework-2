@@ -1,15 +1,20 @@
 import React from 'react';
-import logo from '../../logo.svg';
-import { UserPage } from '../../containers/UserPage/UserPage';
-
+import {UserPage} from '../../containers/UserPage/UserPage';
+import {Route , Switch} from "react-router-dom";
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <UserPage />
-    </div>
-  );
+    return (
+        <div className="App">
+
+            {/*<NavLink exact to='/user-page'>*/}
+            {/*    <UserPage />*/}
+            {/*</NavLink>*/}
+            <Switch>
+                <Route exact path='/user-page' component={UserPage}/>
+            </Switch>
+        </div>
+    );
 }
 
 export default App;
