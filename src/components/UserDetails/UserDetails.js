@@ -31,6 +31,7 @@ const CN = 'user-details';
 //       }
 //     }
 //   };
+
 export class UserDetails extends Component {
   state = {
     userPosts: [],
