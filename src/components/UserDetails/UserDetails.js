@@ -85,7 +85,7 @@ export class UserDetails extends Component {
       );
     }
 
-    const { _links, first_name, last_name, dob, email, gender, address, id } = user;
+    const { _links, first_name, last_name, dob, email, address, id } = user;
     const { avatar } = _links;
 
     return (
