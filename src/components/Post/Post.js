@@ -1,4 +1,4 @@
-import React, { useState, Component } from "react";
+import React, {useState, Component, Fragment} from "react";
 import { Button } from '../Button/Button';
 import { PostImage } from '../PostImage/PostImage';
 import { accessToken } from '../../constants';
@@ -28,15 +28,26 @@ export class Post extends Component {
   // todo в стейт добавить флажок commentsSectionExpanded, который будет означать отображается ли секция с коментариями в данный момент
   // todo в стейт добавить строку error, чтоб хранить значения ошибок, если возникнут
 
-  state = {};
+  state = {
+      comments: [],
+      isCommentsLoading: false,
+      commentsLoaded: false,
+      commentsSectionExpanded: false,
+      error: '',
+  };
 
   onLoadComments = () => {
     // todo достать из props пропсу item, использовать item.id в запросе ниже в строке 39
-
+    const { item } = this.props;
     //todo поменять стейт так, чтоб было понятно что секция с комментариями открыта и началась загрузка
     //todo т.е. isCommentsLoading и commentsSectionExpanded станут true
 
-    fetch(`https://gorest.co.in/public-api/comments?access-token=${accessToken}&post_id=${1/* todo тут вместо 1 будет id поста т.е. item.id */}`, )
+    this.setState({
+        isCommentsLoading: true,
+        commentsSectionExpanded: true,
+    });
+
+    fetch(`https://gorest.co.in/public-api/comments?access-token=${accessToken}&post_id=${item.id/* todo тут вместо 1 будет id поста т.е. item.id */}`, )
       .then(res => {
         if (!res.ok) throw Error(res.statusText);
         return res.json();
@@ -44,6 +55,11 @@ export class Post extends Component {
       .then(data => {
         // todo поменять стейт так, чтоб в comments лежали data.result,
         // todo лоадинг закончился, т.е. isCommentsLoading будет false, а commentsLoaded станет true (т.е. запрос был выполнен)
+          this.setState({
+              comments: data.result,
+              isCommentsLoading: false,
+              commentsLoaded: true,
+          })
       })
       .catch(error => {
         console.log(error);
@@ -51,22 +67,33 @@ export class Post extends Component {
         // todo лоадинг закончился, т.е. isCommentsLoading будет false, а commentsLoaded станет false (т.е. запрос не был выполнен ввиду ошибки)
         // todo в error пойдет значение, error которая вывалилась в результате запроса
         // todo и закроем секцию коментариев т.е. commentsSectionExpanded будет false
+          this.setState({
+              isCommentsLoading: false,
+              error: error,
+              commentSectionExpanded: false,
+          })
       });
   };
 
   onShowComments = () => {
+      const { commentsLoaded, commentsSectionExpanded } = this.state;
+      const { onLoadComments } = this;
     // todo если запрос был выполнен раннее, т.е. commentsLoaded = true
     //    меняем в стейт значение commentsSectionExpanded на противоположное
     //    делаем return; чтоб остально код этой функции не выполнялся
     //    т.е. тоглим отображение комментариев
-
+    commentsLoaded ?
+        this.setState({...this.state, commentsSectionExpanded: !commentsSectionExpanded}) :
+        onLoadComments();
     // todo иначе, если запроса не было выполняем его, вызвав метод onLoadComments
   };
 
   render() {
     {/* todo с помощью  деструктуризации достать из this.state проперти commentsSectionExpanded, error, isCommentsLoading, comments, commentsLoaded */}
+    const { onShowComments } = this;
     const { item, isClosed } = this.props;
     const { id, user_id, title, body } = item;
+    const { error, commentsLoaded, commentsSectionExpanded, isCommentsLoading, comments} = this.state;
 
     return (
       <div className={`${CN} card `}>
@@ -76,13 +103,44 @@ export class Post extends Component {
           <div className="card-text text">{body}</div>
         </div>
 
+          <div className={`${CN}__link-btn`} onClick={onShowComments}>
+              {commentsSectionExpanded ? 'Hide comments' : 'Show Comments'}
+          </div>
         {/* todo создать div который будет выполнять функцию кнопки */}
         {/* todo у него должен быть класс, состоящий из комбинации базового класса CN и строки '__link-btn' */}
         {/* todo в событие  onClick положить метод  onShowComments, объявленный выше */}
         {/* todo в children этого div должна быть положена строка "Show comments" если флажок commentsSectionExpanded в стейте = true*/}
         {/* todo иначе - строка "Hide comments" */}
 
+        <div className={`${CN}`}>
+            {error}
+        </div>
         {/* todo создать div который будет выводить ошибку из стейта, если она существует (т.е. не пустая строка) */}
+
+
+          {
+              commentsSectionExpanded && (
+                  isCommentsLoading ?
+                      (<div className={`${CN}__loading`}>
+                          Loading...
+                      </div>) :
+                      (
+                          comments.length ? (
+                              comments.map(comment => {
+                                  return (
+                                      <div className={`${CN}__comment`}>
+                                          <div className={`${CN}__comment__author`}>{comment.name}</div>
+                                          <div className={`${CN}__comment__text`}>{comment.body}</div>
+                                      </div>
+                                  )
+                              })
+                          ) :
+                              <div className={`${CN}__no-comments`}>
+                                  No comments for this post yet.
+                              </div>
+                      )
+              )
+          }
 
         {
           //todo если секция комментариев открыта, т.е. commentsSectionExpanded = true
