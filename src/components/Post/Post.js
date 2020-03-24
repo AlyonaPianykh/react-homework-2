@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {accessToken} from '../../constants';
 import "./Post.scss";
+import "../../LoadingSpinner/spinner.css"
 import {List} from "../List/List";
 
 // const postExample = {
@@ -32,7 +33,7 @@ export class Post extends Component {
         comments: [],
         isCommentsLoading: false,
         commentsLoaded: false,
-        commentsSectionEpanded: false,
+        commentsSectionExpanded: false,
         error: ''
     };
 
@@ -136,7 +137,7 @@ export class Post extends Component {
 
                 {
                     commentsSectionExpanded && isCommentsLoading ?
-                        <div className={`${CN}__loading`}>Loading comments ...</div> : ''
+                        <span className={`${CN}__loading loading-spinner`}/> : ''
                     //todo если секция комментариев открыта, т.е. commentsSectionExpanded = true
                     // и идет загрузка комментариев, т.е. isCommentsLoading = true
                     // показываем лоадинг индикатор (можно просто строку с надписью "Loading comments ..." в div)
@@ -160,18 +161,18 @@ export class Post extends Component {
                     // если хотите, чтоб выглядело как в видео, добавьте к div класс состоящий из базового класса CN и "__no-results"
                 }
                 {
-                    // commentsSectionExpanded &&
-                    // !isCommentsLoading &&
-                    // commentsLoaded &&
-                    // comments && comments.map(comment => {
-                    //         return (
-                    //             <div key={comment.id} id={comment.id} className={`${CN}__comment`}>
-                    //                 <div className={`${CN}__comment__author`}>{comment.name}</div>
-                    //                 <div className={`${CN}__comment__text`}>{comment.body}</div>
-                    //             </div>
-                    //         )
-                    //     }
-                    // )
+                    commentsSectionExpanded &&
+                    !isCommentsLoading &&
+                    commentsLoaded &&
+                    comments && comments.map(comment => {
+                            return (
+                                <div key={comment.id} id={comment.id} className={`${CN}__comment`}>
+                                    <div className={`${CN}__comment__author`}>{comment.name}</div>
+                                    <div className={`${CN}__comment__text`}>{comment.body}</div>
+                                </div>
+                            )
+                        }
+                    )
                     // todo если секция комментариев открыта, т.е. commentsSectionExpanded = true
                     //   но НЕ идет загрузка комментариев, т.е. isCommentsLoading = false
                     //   и запрос уже был выполнен т.е. commentsLoaded = true

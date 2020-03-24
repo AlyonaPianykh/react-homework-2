@@ -5,6 +5,7 @@ import {UserListOption} from '../../components/UserListOption/UserListOption';
 import {CommentListItem} from '../../components/CommentListItem/CommentListItem'
 import {accessToken} from '../../constants';
 import './UserPage.scss';
+import '../../LoadingSpinner/spinner.css'
 
 const CN = 'user-page';
 
@@ -66,7 +67,7 @@ export class UserPage extends Component {
                     error && <div>{error}</div>
                 }
                 {
-                    isLoading && <div>Loading...</div>
+                    isLoading && <span className={'loading-spinner'}/>
                 }
 
                 {
@@ -77,7 +78,7 @@ export class UserPage extends Component {
                                 onOptionSelect={this.onUserSelect}
                                 selectedOptionId={selectedUserId}
                                 itemRenderer={UserListOption}
-                                itemRenderer={CommentListItem}
+                                // itemRenderer={CommentListItem}
                                 className={`${CN}__user-list`}
                                 title="All Users:"
                             />
