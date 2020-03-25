@@ -72,9 +72,15 @@ export class UserDetails extends Component {
       });
   };
 
+  onPostSelectHandler = (id) => {
+    const { onPostSelect } = this.props;
+    console.log(id);
+    onPostSelect(id);
+  };
+
   render() {
     const { user } = this.props;
-    const { userPosts, isPostsLoading } = this.state;
+    const { userPosts, isPostsLoading, selectedPostId } = this.state;
 
     if (!user) {
       return (
@@ -113,8 +119,14 @@ export class UserDetails extends Component {
           {
             !isPostsLoading && !!userPosts.length && (
               <>
-
-              <List title="All posts:" options={userPosts} itemRenderer={Post} className={`${CN}__posts-list`}/>
+              <List
+                  title="All posts:"
+                  options={userPosts}
+                  onOptionSelect={this.onPostSelectHandler}
+                  selectedOptionId={selectedPostId}
+                  itemRenderer={Post}
+                  className={`${CN}__posts-list`}
+              />
               </>
             )
           }
