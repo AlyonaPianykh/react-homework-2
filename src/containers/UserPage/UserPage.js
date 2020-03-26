@@ -4,10 +4,11 @@ import {UserDetails} from '../../components/UserDetails/UserDetails';
 import {UserListOption} from '../../components/UserListOption/UserListOption';
 import {accessToken} from '../../constants';
 import './UserPage.scss';
+import {connect} from "react-redux";
 
 const CN = 'user-page';
 
-export class UserPage extends Component {
+class UserPage extends Component {
     constructor(props) {
         super(props);
 
@@ -68,10 +69,12 @@ export class UserPage extends Component {
 
     render() {
         const {usersList, selectedUserId, isLoading, error} = this.state;
+        const { isAuth } = this.props;
         const selectedUser = usersList.length && usersList.find(user => user.id === selectedUserId);
 
         return (
-            <div className={CN}>
+            // isAuth ?
+                (<div className={CN}>
                 {
                     error && <div>{error}</div>
                 }
@@ -97,7 +100,18 @@ export class UserPage extends Component {
                     )
                 }
 
-            </div>
+            </div>) //:
+                // (
+                //     <h2>YOU ARE NOT AUTHORIZED !</h2>
+                // )
         );
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        isAuth: state.isAuth,
+    }
+};
+
+export default connect(mapStateToProps)(UserPage)

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-
-import { Post } from '../Post/Post';
 import { List } from '../List/List';
 import { accessToken } from '../../constants';
+import {PostPreview} from "../PostPreview/PostPreview";
 import './UserDetails.scss';
 
 const CN = 'user-details';
@@ -40,7 +39,7 @@ export class UserDetails extends Component {
   componentDidUpdate(prevProps, prevState) {
     const { user } = this.props;
 
-    if (user && prevProps.user && user.id !== prevProps.user.id || !prevProps.user && user) {
+    if ((user && prevProps.user && user.id !== prevProps.user.id) || (!prevProps.user && user)) {
       this.loadUserPosts();
     }
   }
@@ -124,7 +123,7 @@ export class UserDetails extends Component {
                   options={userPosts}
                   onOptionSelect={this.onPostSelectHandler}
                   selectedOptionId={selectedPostId}
-                  itemRenderer={Post}
+                  itemRenderer={PostPreview}
                   className={`${CN}__posts-list`}
               />
               </>

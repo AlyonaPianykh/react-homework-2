@@ -1,6 +1,4 @@
-import React, {useState, Component, Fragment} from "react";
-import { Button } from '../Button/Button';
-import { PostImage } from '../PostImage/PostImage';
+import React, { Component } from "react";
 import { accessToken } from '../../constants';
 import "./Post.scss";
 
