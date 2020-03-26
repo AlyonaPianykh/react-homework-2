@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import {BrowserRouter, Switch, Route, NavLink} from 'react-router-dom'
 import { List } from '../../components/List/List';
 import { UserDetails } from '../../components/UserDetails/UserDetails';
 import { UserListOption } from '../../components/UserListOption/UserListOption';
 import { accessToken } from '../../constants';
 import './UserPage.scss';
+import {Loading} from "../../components/Loading/Loading";
+
 
 const CN = 'user-page';
 
@@ -65,7 +68,7 @@ export class UserPage extends Component {
           error && <div>{error}</div>
         }
         {
-          isLoading && <div>Loading...</div>
+          isLoading && <Loading/>
         }
 
         {
@@ -79,7 +82,13 @@ export class UserPage extends Component {
                   className={`${CN}__user-list`}
                   title="All Users:"
                 />
-              <UserDetails user={selectedUser}/>
+                <Switch>
+                  <Route exact path="/details" render={() => <div>Click on user to see info about he/she</div>}/>
+                  <Route exact path="/details/:id" render={(routerProps) =>
+                      <UserDetails user={selectedUser} {...routerProps}/>}/>
+                  {/*<UserDetails user={selectedUser}/>*/}
+                </Switch>
+
             </div>
           )
         }
