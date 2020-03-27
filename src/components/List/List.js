@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {BrowserRouter, Switch, Route, NavLink} from 'react-router-dom'
 import './List.scss';
 
 const CN = 'custom-list';
@@ -31,6 +32,7 @@ export class List extends Component {
                   className={`list-group-item ${item.id === selectedOptionId ? 'active' : ''}`}
                   onClick={this.onOptionClick(item.id)}
               >
+                <NavLink exact to={`/details/${item.id}`}>Info about</NavLink>
                 <ItemRenderer item={item} />
               </li>
             );

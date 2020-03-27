@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import {BrowserRouter, Switch, Route, NavLink} from 'react-router-dom'
 
 import { Post } from '../Post/Post';
 import { List } from '../List/List';
 import { accessToken } from '../../constants';
 import './UserDetails.scss';
+import {Loading} from "../Loading/Loading";
 
 const CN = 'user-details';
 
@@ -38,7 +40,7 @@ export class UserDetails extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    const { user } = this.props;
+    const { user, match: {params: {id}}} = this.props;
 
     if (user && prevProps.user && user.id !== prevProps.user.id || !prevProps.user && user) {
       this.loadUserPosts();
@@ -125,7 +127,9 @@ export class UserDetails extends Component {
           }
           {
             isPostsLoading && (
-              <div>Posts are in loading state ...</div>
+              <div>Posts are in loading state ...
+                <Loading/>
+              </div>
             )
           }
         </div>
