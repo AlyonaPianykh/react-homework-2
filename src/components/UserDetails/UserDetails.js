@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-
 import { Post } from '../Post/Post';
 import { List } from '../List/List';
 import { accessToken } from '../../constants';
 import './UserDetails.scss';
+import {LoadingIndicator} from "../LoadingIndicator/LoadingIndicator";
 
 const CN = 'user-details';
 
@@ -84,7 +84,7 @@ export class UserDetails extends Component {
       );
     }
 
-    const { _links, first_name, last_name, dob, email, gender, address, id } = user;
+    const { _links, first_name, last_name, dob, email, address, id } = user;
     const { avatar } = _links;
 
     return (
@@ -92,7 +92,7 @@ export class UserDetails extends Component {
         <div className={`${CN}__id`}>id:{id}</div>
         <div className="user-info ">
           <div className="user-info-avatar">
-            <img src={avatar.href} alt="photo"/>
+            <img src={avatar.href} alt=""/>
           </div>
           <div className="user-data">
             <p>
@@ -124,9 +124,11 @@ export class UserDetails extends Component {
             )
           }
           {
-            isPostsLoading && (
-              <div>Posts are in loading state ...</div>
-            )
+            isPostsLoading && <LoadingIndicator/>
+
+            // (
+            //    <div>Posts are in loading state ...</div>
+            // )
           }
         </div>
       </div>

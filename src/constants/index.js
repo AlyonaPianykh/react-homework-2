@@ -1,2 +1,2 @@
-// todo: добавить ваш токен
-export const accessToken = '';
+//  добавить ваш токен
+export const accessToken = 'lW8dJ26HzM99WpNSywafFacLDxtuFmHMDZ5v';
