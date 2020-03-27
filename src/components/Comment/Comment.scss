@@ -1,0 +1,27 @@
+.post {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  margin: 20px;
+  //overflow: auto;
+
+  &__comment {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    padding: 15px;
+    margin: 10px;
+    border: 1px solid lightslategray;
+    font-size: 14px;
+
+    &__author {
+      font-weight: bold;
+      font-size: 12px;
+    }
+
+    &__text {
+      font-size: 12px;
+    }
+  }
+}

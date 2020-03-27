@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-
-import { Post } from '../Post/Post';
 import { List } from '../List/List';
 import { accessToken } from '../../constants';
+import {PostPreview} from "../PostPreview/PostPreview";
 import './UserDetails.scss';
 
 const CN = 'user-details';
@@ -40,7 +39,7 @@ export class UserDetails extends Component {
   componentDidUpdate(prevProps, prevState) {
     const { user } = this.props;
 
-    if (user && prevProps.user && user.id !== prevProps.user.id || !prevProps.user && user) {
+    if ((user && prevProps.user && user.id !== prevProps.user.id) || (!prevProps.user && user)) {
       this.loadUserPosts();
     }
   }
@@ -72,9 +71,15 @@ export class UserDetails extends Component {
       });
   };
 
+  onPostSelectHandler = (id) => {
+    const { onPostSelect } = this.props;
+    console.log(id);
+    onPostSelect(id);
+  };
+
   render() {
     const { user } = this.props;
-    const { userPosts, isPostsLoading } = this.state;
+    const { userPosts, isPostsLoading, selectedPostId } = this.state;
 
     if (!user) {
       return (
@@ -84,7 +89,7 @@ export class UserDetails extends Component {
       );
     }
 
-    const { _links, first_name, last_name, dob, email, gender, address, id } = user;
+    const { _links, first_name, last_name, dob, email, address, id } = user;
     const { avatar } = _links;
 
     return (
@@ -113,8 +118,14 @@ export class UserDetails extends Component {
           {
             !isPostsLoading && !!userPosts.length && (
               <>
-
-              <List title="All posts:" options={userPosts} itemRenderer={Post} className={`${CN}__posts-list`}/>
+              <List
+                  title="All posts:"
+                  options={userPosts}
+                  onOptionSelect={this.onPostSelectHandler}
+                  selectedOptionId={selectedPostId}
+                  itemRenderer={PostPreview}
+                  className={`${CN}__posts-list`}
+              />
               </>
             )
           }
