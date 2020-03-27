@@ -4,6 +4,7 @@ import { Post } from '../Post/Post';
 import { List } from '../List/List';
 import { accessToken } from '../../constants';
 import './UserDetails.scss';
+import '../../LoadingSpinner/spinner.css'
 
 const CN = 'user-details';
 
@@ -30,6 +31,7 @@ const CN = 'user-details';
 //       }
 //     }
 //   };
+
 export class UserDetails extends Component {
   state = {
     userPosts: [],
@@ -84,7 +86,7 @@ export class UserDetails extends Component {
       );
     }
 
-    const { _links, first_name, last_name, dob, email, gender, address, id } = user;
+    const { _links, first_name, last_name, dob, email, address, id } = user;
     const { avatar } = _links;
 
     return (
@@ -125,7 +127,7 @@ export class UserDetails extends Component {
           }
           {
             isPostsLoading && (
-              <div>Posts are in loading state ...</div>
+              <span className={'loading-spinner'} />
             )
           }
         </div>
