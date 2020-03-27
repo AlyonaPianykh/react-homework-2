@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import Button from "reactstrap/es/Button";
+import { Button } from '../../components/Button/Button'
 import {connect} from "react-redux";
 
 class HomePage extends Component {
 
     onAuthHandler = () => {
-        const {history, match: { url }, auth} = this.props;
+        const {history , auth} = this.props;
         auth();
         debugger
         console.log(this.props);
@@ -20,11 +20,11 @@ class HomePage extends Component {
             <div>
                 <h2>
                     {
-                        !isAuth && `YOU AREN'T AUTHORIZED !`
+                        !isAuth && `YOU AREN'T AUTHORIZED!`
                     }
                 </h2>
                 <h2>Wanna see posts? Click button</h2>
-                <Button onClick={onAuthHandler}/>
+                <Button onClick={onAuthHandler} label='Auth'/>
             </div>
         );
     }

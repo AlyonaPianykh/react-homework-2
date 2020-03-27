@@ -25,13 +25,12 @@ export class PostPreview extends Component {
     };
 
     render() {
-        console.log(this.state.id);
         const { item } = this.props;
-        const { id, user_id, title } = item;
+        const { id, title } = item;
         const { error } = this.state;
 
         return (
-            <div className={`${CN} card `}>
+            <div className={`${CN} card`}>
                 <div className={`${CN}__id`}>id: {id}</div>
                 <div className="card-body">
                     <div className="card-title"> {title} </div>

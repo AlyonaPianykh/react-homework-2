@@ -3,6 +3,7 @@
   flex-direction: column;
   width: 500px;
   margin: 20px;
+  overflow: auto!important;
 
   &__id {
     font-size: 8px;
@@ -52,6 +53,10 @@
     &:hover {
       text-decoration: underline;
     }
+  }
+
+  &__comments-block{
+    overflow: auto;
   }
 
   &__comment {
