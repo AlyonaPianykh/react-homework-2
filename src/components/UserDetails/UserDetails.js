@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import {BrowserRouter, Switch, Route, NavLink} from 'react-router-dom'
 
-import { Post } from '../Post/Post';
 import { List } from '../List/List';
 import { accessToken } from '../../constants';
 import './UserDetails.scss';
 import {Loading} from "../Loading/Loading";
+import {PostItem} from "../PostItem/PostItem";
 
 const CN = 'user-details';
 
@@ -40,7 +39,7 @@ export class UserDetails extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    const { user, match: {params: {id}}} = this.props;
+    const { user } = this.props;
 
     if (user && prevProps.user && user.id !== prevProps.user.id || !prevProps.user && user) {
       this.loadUserPosts();
@@ -116,7 +115,7 @@ export class UserDetails extends Component {
             !isPostsLoading && !!userPosts.length && (
               <>
 
-              <List title="All posts:" options={userPosts} itemRenderer={Post} className={`${CN}__posts-list`}/>
+              <List title="All posts:" options={userPosts} itemRenderer={PostItem} className={`${CN}__posts-list`}/>
               </>
             )
           }
