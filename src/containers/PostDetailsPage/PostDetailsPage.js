@@ -34,8 +34,9 @@ export class PostDetailsPage extends Component {
     };
 
     componentDidMount() {
-        if (this.props.match.id) {
-            this.onPostLoad(this.props.match.id)
+        const {match} = this.props;
+        if (match.id) {
+            this.onPostLoad(match.id)
         }
     }
 
