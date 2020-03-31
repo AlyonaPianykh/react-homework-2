@@ -35,7 +35,7 @@ export class PostDetailsPage extends Component {
 
     componentDidMount() {
         const {match} = this.props;
-        if (match.id) {
+        if (!!match.id) {
             this.onPostLoad(match.id)
         }
     }
@@ -106,33 +106,36 @@ export class PostDetailsPage extends Component {
 
   render() {
       const {post, isPostsLoading, commentsSectionExpanded, error, isCommentsLoading, comments, commentsLoaded} = this.state;
-      const {id, title, body} = post;
 
-      return (
-          <div>
-              {!post && !isPostsLoading && <div>No Post</div>}
-              {!post && isPostsLoading && <div><LoadingIndicator/></div>}
-
-              <div className={`${CN} card `}>
-                  <div className={`${CN}__id`}>id: {id}</div>
-                  <div className="card-body">
-                      <div className="card-title">{title}</div>
-                      <div className="card-text text">{body}</div>
+      if (!post && !isPostsLoading){
+          return <div>No Post</div>
+      } else if (!post && isPostsLoading) {
+          return <LoadingIndicator/>
+      } else {
+          const {id, title, body} = post;
+          return (
+              <div>
+                  <div className={`${CN} card `}>
+                      <div className={`${CN}__id`}>id: {id}</div>
+                      <div className="card-body">
+                          <div className="card-title">{title}</div>
+                          <div className="card-text text">{body}</div>
+                      </div>
+                      <div className={`${CN}__link-btn`} onClick={this.onShowComments}>
+                          {commentsSectionExpanded ? "Hide comments" : "Show comments"}
+                      </div>
+                      {error && <div>{error}</div>}
+                      {commentsSectionExpanded && isCommentsLoading &&
+                      <div className={`${CN}__loading`}>
+                          <LoadingIndicator/>
+                      </div>}
+                      {commentsSectionExpanded && !isCommentsLoading && commentsLoaded && !comments.length &&
+                      <div className={`${CN}__no-results`}>"No comments for this post yet"</div>}
+                      {commentsSectionExpanded && !isCommentsLoading && commentsLoaded && !!comments.length &&
+                      <List itemRenderer={CommentListItem} options={comments}/>}
                   </div>
-                  <div className={`${CN}__link-btn`} onClick={this.onShowComments}>
-                      {commentsSectionExpanded ? "Hide comments" : "Show comments"}
-                  </div>
-                  {error && <div>{error}</div>}
-                  {commentsSectionExpanded && isCommentsLoading &&
-                  <div className={`${CN}__loading`}>
-                      <LoadingIndicator/>
-                  </div>}
-                  {commentsSectionExpanded && !isCommentsLoading && commentsLoaded && !comments.length &&
-                  <div className={`${CN}__no-results`}>"No comments for this post yet"</div>}
-                  {commentsSectionExpanded && !isCommentsLoading && commentsLoaded && !!comments.length &&
-                  <List itemRenderer={CommentListItem} options={comments}/>}
               </div>
-          </div>
-      );
+          );
+      }
   };
 }
