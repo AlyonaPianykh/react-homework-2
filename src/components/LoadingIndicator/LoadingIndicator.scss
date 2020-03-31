@@ -1,0 +1,25 @@
+.loading-center {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__loadingspinner{
+    pointer-events: none;
+    width: 3em;
+    height: 3em;
+    border: 0.5em solid transparent;
+    border-color: #eee;
+    border-top-color: #1633dd;
+    border-radius: 50%;
+    animation: loadingspin 2s linear infinite;
+  }
+
+  @keyframes loadingspin {
+    100% {
+      transform: rotate(360deg)
+    }
+  }
+}

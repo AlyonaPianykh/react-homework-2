@@ -1,35 +1,12 @@
 import React, { Component } from 'react';
-
-import { Post } from '../Post/Post';
+import { PostItem} from "../PostItem/PostItem";
 import { List } from '../List/List';
 import { accessToken } from '../../constants';
+import {LoadingIndicator} from "../LoadingIndicator/LoadingIndicator";
 import './UserDetails.scss';
 
 const CN = 'user-details';
 
-// const userDataExample = {
-//     "id": "349",
-//     "first_name": "Gerhard",
-//     "last_name": "Krajcik",
-//     "gender": "male",
-//     "dob": "1999-04-01",
-//     "email": "heather93@example.net",
-//     "phone": "324-648-3742 x8692",
-//     "website": "http://stoltenberg.org/repellendus-enim-facere-aliquid-dicta-suscipit-vel",
-//     "address": "69447 Kuhic Walk Suite 052\nRodriguezborough, WI 27313-8139",
-//     "status": "active",
-//     "_links": {
-//       "self": {
-//         "href": "https://gorest.co.in/public-api/users/349"
-//       },
-//       "edit": {
-//         "href": "https://gorest.co.in/public-api/users/349"
-//       },
-//       "avatar": {
-//         "href": "https://lorempixel.com/250/250/people/?47073"
-//       }
-//     }
-//   };
 export class UserDetails extends Component {
   state = {
     userPosts: [],
@@ -84,7 +61,7 @@ export class UserDetails extends Component {
       );
     }
 
-    const { _links, first_name, last_name, dob, email, gender, address, id } = user;
+    const { _links, first_name, last_name, dob, email, address, id } = user;
     const { avatar } = _links;
 
     return (
@@ -92,7 +69,7 @@ export class UserDetails extends Component {
         <div className={`${CN}__id`}>id:{id}</div>
         <div className="user-info ">
           <div className="user-info-avatar">
-            <img src={avatar.href} alt="photo"/>
+            <img src={avatar.href} alt=""/>
           </div>
           <div className="user-data">
             <p>
@@ -114,7 +91,7 @@ export class UserDetails extends Component {
             !isPostsLoading && !!userPosts.length && (
               <>
 
-              <List title="All posts:" options={userPosts} itemRenderer={Post} className={`${CN}__posts-list`}/>
+              <List title="All posts:" options={userPosts} itemRenderer={PostItem} className={`${CN}__posts-list`}/>
               </>
             )
           }
@@ -124,9 +101,11 @@ export class UserDetails extends Component {
             )
           }
           {
-            isPostsLoading && (
-              <div>Posts are in loading state ...</div>
-            )
+            isPostsLoading && <LoadingIndicator/>
+
+            // (
+            //    <div>Posts are in loading state ...</div>
+            // )
           }
         </div>
       </div>

@@ -18,7 +18,7 @@ export class List extends Component {
   };
 
   render() {
-    const { options, selectedOptionId, itemRenderer, className = '', title = '' } = this.props;
+    const { options, selectedOptionId, itemRenderer, className = '', title = ''} = this.props;
     const ItemRenderer = itemRenderer;
 
     return (

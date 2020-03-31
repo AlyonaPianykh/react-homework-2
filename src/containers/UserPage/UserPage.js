@@ -4,6 +4,7 @@ import { UserDetails } from '../../components/UserDetails/UserDetails';
 import { UserListOption } from '../../components/UserListOption/UserListOption';
 import { accessToken } from '../../constants';
 import './UserPage.scss';
+import {LoadingIndicator} from "../../components/LoadingIndicator/LoadingIndicator";
 
 const CN = 'user-page';
 
@@ -65,12 +66,13 @@ export class UserPage extends Component {
           error && <div>{error}</div>
         }
         {
-          isLoading && <div>Loading...</div>
+          isLoading && <LoadingIndicator/>
+          // <div>Loading...</div>
         }
 
         {
           !isLoading && (
-            <div className={`${CN}__content d-flex`}>
+            <div className={`${CN}__content d-flex App`}>
                 <List
                   options={usersList}
                   onOptionSelect={this.onUserSelect}
