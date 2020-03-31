@@ -1,35 +1,12 @@
 import React, { Component } from 'react';
-import { Post } from '../Post/Post';
+import { PostItem} from "../PostItem/PostItem";
 import { List } from '../List/List';
 import { accessToken } from '../../constants';
-import './UserDetails.scss';
 import {LoadingIndicator} from "../LoadingIndicator/LoadingIndicator";
+import './UserDetails.scss';
 
 const CN = 'user-details';
 
-// const userDataExample = {
-//     "id": "349",
-//     "first_name": "Gerhard",
-//     "last_name": "Krajcik",
-//     "gender": "male",
-//     "dob": "1999-04-01",
-//     "email": "heather93@example.net",
-//     "phone": "324-648-3742 x8692",
-//     "website": "http://stoltenberg.org/repellendus-enim-facere-aliquid-dicta-suscipit-vel",
-//     "address": "69447 Kuhic Walk Suite 052\nRodriguezborough, WI 27313-8139",
-//     "status": "active",
-//     "_links": {
-//       "self": {
-//         "href": "https://gorest.co.in/public-api/users/349"
-//       },
-//       "edit": {
-//         "href": "https://gorest.co.in/public-api/users/349"
-//       },
-//       "avatar": {
-//         "href": "https://lorempixel.com/250/250/people/?47073"
-//       }
-//     }
-//   };
 export class UserDetails extends Component {
   state = {
     userPosts: [],
@@ -114,7 +91,7 @@ export class UserDetails extends Component {
             !isPostsLoading && !!userPosts.length && (
               <>
 
-              <List title="All posts:" options={userPosts} itemRenderer={Post} className={`${CN}__posts-list`}/>
+              <List title="All posts:" options={userPosts} itemRenderer={PostItem} className={`${CN}__posts-list`}/>
               </>
             )
           }
