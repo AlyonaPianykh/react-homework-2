@@ -16,13 +16,9 @@ function App() {
             <Switch>
                 <Redirect exact from="/" to="/users"/>
                 <Route exact path="/users">
-                    <div className="App">
-                        <UserPage/>
-                    </div>
+                    <UserPage/>
                 </Route>
-                <Route path="/posts/:id">
-                    <PostDetailsPage />
-                </Route>
+                <Route path="/posts/:id" render={(props) => <PostDetailsPage {...props}/>}/>
                 <Route exact path="/not-found">
                     <NotFoundPage/>
                 </Route>

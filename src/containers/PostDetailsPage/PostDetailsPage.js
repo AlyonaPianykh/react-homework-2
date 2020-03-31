@@ -35,8 +35,8 @@ export class PostDetailsPage extends Component {
 
     componentDidMount() {
         const {match} = this.props;
-        if (!!match.id) {
-            this.onPostLoad(match.id)
+        if (!!match.params.id) {
+            this.onPostLoad(match.params.id)
         }
     }
 
@@ -66,14 +66,14 @@ export class PostDetailsPage extends Component {
     };
 
     onLoadComments = () => {
-        const {item} = this.props;
+        const {post} = this.state;
 
         this.setState({
             isCommentsLoading: true,
             commentsSectionExpanded: true
         });
 
-        fetch(`https://gorest.co.in/public-api/comments?access-token=${accessToken}&post_id=${item.id}`,)
+        fetch(`https://gorest.co.in/public-api/comments?access-token=${accessToken}&post_id=${post.id}`,)
             .then(res => {
                 if (!res.ok) throw Error(res.statusText);
                 return res.json();

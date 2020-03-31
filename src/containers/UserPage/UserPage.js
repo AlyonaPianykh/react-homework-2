@@ -72,7 +72,7 @@ export class UserPage extends Component {
 
         {
           !isLoading && (
-            <div className={`${CN}__content d-flex`}>
+            <div className={`${CN}__content d-flex App`}>
                 <List
                   options={usersList}
                   onOptionSelect={this.onUserSelect}
